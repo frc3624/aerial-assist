@@ -38,6 +38,9 @@ public class Drive extends SubsystemBase {
   }
 
   /**
+   * Giving the gyro angle makes driving the robot field oriented.
+   * https://www.youtube.com/watch?v=7Cxj1JpKDhc
+   * 
    * @param ySpeed The robot's speed along the Y axis [-1.0..1.0]. Right is positive.
    * @param xSpeed The robot's speed along the X axis [-1.0..1.0]. Forward is positive.
    * @param zRotation The robot's rotation rate around the Z axis [-1.0..1.0]. Clockwise is positive.
@@ -45,7 +48,6 @@ public class Drive extends SubsystemBase {
    */
   public void driveCartesian(double ySpeed, double xSpeed, double zRotation, double gyroAngle) {
     mechaDrive.driveCartesian(ySpeed, xSpeed, zRotation, gyroAngle);
-    System.out.println(gyroAngle);
   }
 
 }

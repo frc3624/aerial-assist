@@ -18,7 +18,8 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
   
   private final Joystick joystick = new Joystick(JOYSTICK_ID);
-  private final JoystickButton switchArmStateButton = new JoystickButton(joystick, 2);
+  private final JoystickButton switchArmStateButton = new JoystickButton(joystick, 1);
+  private final JoystickButton switchDriveModeButton = new JoystickButton(joystick, 2);
   private final JoystickButton smackForwardButton = new JoystickButton(joystick, 5);
   private final JoystickButton smackBackwardButton = new JoystickButton(joystick, 3);
   private final JoystickButton rotateArmsUpButton = new JoystickButton(joystick, 6);
@@ -29,7 +30,10 @@ public class RobotContainer {
   private final Smacker smacker = new Smacker();
   private final MotionSensor motionSensor = new MotionSensor();
 
-  private final JoystickDrive joystickDrive = new JoystickDrive(drive, motionSensor, joystick);
+  private final JoystickDrive joystickDrive = new JoystickDrive(drive, joystick);
+  private final FieldOrientedJoystickDrive fieldOrientedJoystickDrive = new FieldOrientedJoystickDrive(drive, motionSensor, joystick);
+  private final SwitchDriveMode switchDriveMode = new SwitchDriveMode(drive, joystickDrive, fieldOrientedJoystickDrive);
+
   private final SwitchArmState switchArmState = new SwitchArmState(arms);
   private final Smack smackBack = new Smack(smacker, -.5);
   private final Smack smackForward = new Smack(smacker, 1);
@@ -44,6 +48,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     switchArmStateButton.whenPressed(switchArmState);
+    switchDriveModeButton.whenPressed(switchDriveMode);
     smackForwardButton.whileHeld(smackForward);
     smackBackwardButton.whileHeld(smackBack);
     rotateArmsUpButton.whileHeld(rotateArmsUp);

@@ -7,28 +7,32 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Smacker;
+import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.MotionSensor;
 
-public class Smack extends CommandBase {
-  
-  private final Smacker smacker;
-  private double speed;
+public class FieldOrientedJoystickDrive extends CommandBase {
 
-  public Smack(Smacker smacker, double speed) {
-    this.smacker = smacker;
-    addRequirements(this.smacker);
-    this.speed = speed;
+  private final Drive drive;
+  private final MotionSensor motionSensor;
+  private final Joystick joystick;
+
+  public FieldOrientedJoystickDrive(Drive drive, MotionSensor motionSensor, Joystick joystick) {
+    this.drive = drive;
+    addRequirements(this.drive);
+    this.motionSensor = motionSensor;
+    this.joystick = joystick;
   }
 
   @Override
-  public void initialize() {
-    smacker.set(speed);
+  public void execute() {
+    drive.driveCartesian(joystick.getX(), -joystick.getY(), joystick.getZ(), -motionSensor.getAngle());
   }
 
   @Override
   public void end(boolean interrupted) {
-    smacker.set(0);
+    drive.driveCartesian(0, 0, 0);
   }
 
   @Override
