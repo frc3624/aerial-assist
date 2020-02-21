@@ -33,7 +33,7 @@ public class MotionSensor {
   /*
    * These methods literally just return the exact same thing the AHRS class
    * gives, so why not just make ahrs public and let other classes use it?
-   * What if we change the gryroscope to something else? Then we will have to change
+   * What if we change the gyroscope to something else? Then we will have to change
    * code all over the place instead of just here.
    */
   public boolean isConnected() {

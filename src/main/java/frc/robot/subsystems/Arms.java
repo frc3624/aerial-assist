@@ -61,7 +61,7 @@ public class Arms extends SubsystemBase {
 
   /*
    * Limit switches are literally buttons that get pressed when something, in this case the arms, move
-   * far enough in a certain direction for them to be presssed.
+   * far enough in a certain direction for them to be pressed.
    * 
    * .get() returns false when the limit switch is activated, even though it would make a lot more sense 
    * for it to return true.

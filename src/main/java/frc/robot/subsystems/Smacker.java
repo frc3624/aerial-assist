@@ -15,7 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 /*
- * Name curtesey of Haadi Khan
+ * Name curtesy of Haadi Khan
  */
 public class Smacker extends SubsystemBase {
 
