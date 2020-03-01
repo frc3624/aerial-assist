@@ -7,13 +7,24 @@
 
 package frc.robot;
 
-import static frc.robot.Constants.*;
+import static frc.robot.Constants.JOYSTICK_ID;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandGroupBase;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
+import frc.robot.commands.DriveToPosition;
+import frc.robot.commands.FieldOrientedJoystickDrive;
+import frc.robot.commands.JoystickDrive;
+import frc.robot.commands.RotateArms;
+import frc.robot.commands.Smack;
+import frc.robot.commands.SwitchArmState;
+import frc.robot.commands.SwitchDriveMode;
+import frc.robot.subsystems.Arms;
+import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.MotionSensor;
+import frc.robot.subsystems.Smacker;
 
 public class RobotContainer {
   
@@ -39,7 +50,8 @@ public class RobotContainer {
   private final Smack smackForward = new Smack(smacker, 1);
   private final RotateArms rotateArmsUp = new RotateArms(arms, -.5);
   private final RotateArms rotateArmsDown = new RotateArms(arms, .5);
-  private final Command autoCommand = null;
+  private final Command autoCommand = CommandGroupBase.sequence(new DriveToPosition(drive, motionSensor, 10, 10, 45), 
+      new WaitCommand(1).deadlineWith(smackForward));
 
   public RobotContainer() {
     drive.setDefaultCommand(joystickDrive);
